@@ -67,6 +67,8 @@ void menu()
 		}
 
 		system("pause"); // somente no windows
+
+
 	}
 }
 
@@ -119,37 +121,71 @@ void inserirElemento()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+	int valorInserido = 0;
+	int naoExiste = false;
+
 	if (novo == NULL)
 	{
 		return;
 	}
 
 	cout << "Digite o elemento: ";
-	cin >> novo->valor;
+	cin >> valorInserido;
+
+	novo->valor = valorInserido;
 	novo->prox = NULL;
 
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		cout << "Valor inserido com sucesso!\n\n";
 	}
 	else
 	{
-		// procura o final da lista
 		NO* aux = primeiro;
-		while (aux->prox != NULL) {
+		while (aux != NULL) {
+			if (aux->valor == valorInserido) {
+				naoExiste = true;
+				cout << "Nao e permitido valores repetidos na lista.\n\n";
+				break;
+			}
 			aux = aux->prox;
 		}
-		aux->prox = novo;
+		if (!naoExiste) {
+
+			cout << "Valor inserido com sucesso!\n\n";
+		}
 	}
 }
 
 void excluirElemento()
 {
-	
+	int elemento = 0;
+	cout << "Insira o elemento a ser excluido: ";
+	cin >> elemento;
+
+	NO* posicao = posicaoElemento(elemento);
+	if (posicao) {
+		cout << "ENCONTRADO\n\n";
+	}
+	else {
+		cout << "ELEMENTO NAO ENCONTRADO\n\n";
+	}
+
 }
 
 void buscarElemento()
 {
+	int elemento = 0;
+	cout << "Insira o elemento a ser buscado: ";
+	cin >> elemento;
+	NO* posicao = posicaoElemento(elemento);
+	if (posicao) {
+		cout << "ENCONTRADO\n\n"; 
+	}
+	else {
+		cout << "ELEMENTO NAO ENCONTRADO\n\n";
+	}
 	
 }
 
